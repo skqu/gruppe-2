@@ -7,3 +7,4 @@ Det er vores test 2
 
 ## En hilsen fra underviser
 
+Dette er fra Version 1 af lommeregner
