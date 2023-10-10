@@ -56,10 +56,19 @@ buttons = [
 ]
 
 # Opret knapper og bind dem til calculate-funktionen
+# Løkke gennem 5 iterationer for rækker i grænsefladen
 for i in range(5):
+
+    # Løkke gennem elementerne i den aktuelle række
     for j in range(len(buttons[i])):
+
+        # Opret en knap med specificeret tekst og skrifttype
         btn = tk.Button(root, text=buttons[i][j], font='lucida 15 bold')
+
+        # Bind begivenhedshåndtereren "calculate" til venstreklik på knappen
         btn.bind("<Button-1>", calculate)
+
+        # Placer knappen i gitteret på den rigtige række og kolonne
         btn.grid(row=i+1, column=j)
 
 # Start hovedløkken for tkinter
