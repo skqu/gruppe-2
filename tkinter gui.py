@@ -1,7 +1,6 @@
 #importerer TKinter
 from tkinter import *
 
-
 # GUI for lommeregneren vi laver
 #Laver roden for lommeregneren, med en title og størelsen for hvor man kan skrive
 root = Tk()
@@ -9,44 +8,35 @@ root.title("Lommeregner 2.0")
 root.geometry("320x345")
 root.resizable(False, False)
 root.configure(bg="#444547")
-e = Entry(root, width=20, borderwidth=1,bg="#666769", fg="white", font=("Helvetica", 16))
+result_var = StringVar()
+e = Entry(root, textvariable=result_var, width=20, borderwidth=1, bg="#666769", fg="white", font=("Helvetica", 16))
 e.grid(row=0, column=0, columnspan=100, padx=(10, 10), pady=10)
 
 #Sørger for at man kun kan skrive numre i den
 def is_valid_input(P):
-    return (P.isdigit() or P in "+-*÷") and not (e.get() == "" and P in "+-*÷")
+    return (P.isdigit() or P in "+-*÷") and not (result_var.get() == "" and P in "+-*÷")
 
 vcmd = root.register(is_valid_input)
 e.configure(validate="key", validatecommand=(vcmd, "%P"))
 
 def button_click(char):
-    if char == 'C':
-        e.delete(0, END)
-    elif char == '=':
+    if char == '=':
         try:
             current_text = e.get()
-            current_text = current_text.replace("÷", "/").replace("*", "*")
             result = eval(current_text)
-            e.delete(0, END)
-            e.insert(END, result)
+            result_var.set(result)
         except:
-            e.delete(0, END)
-            e.insert(END, "Error")
+            result_var.set("Error")
     else:
-        current_text = e.get()
-        # Check if there's an error message; if so, clear it
-        if current_text == "Error":
-            current_text = ""
-        e.delete(0, END)
-        e.insert(END, current_text + str(char))
+        result_var.set(result_var.get() + str(char))
 
 def button_clear():
-    e.delete(0, END)
+    result_var.set("")
 
 button_font = ("Arial", 16, "bold")
 
 
-#Tal
+#Tal som knapper
 button_1 = Button(root, text="1", font=button_font, width=2, height=1, padx=20, pady=15,bg="#666769", fg="white", command=lambda: button_click(1))
 button_2 = Button(root, text="2", font=button_font, width=2, height=1, padx=20, pady=15,bg="#666769", fg="white", command=lambda: button_click(2))
 button_3 = Button(root, text="3", font=button_font, width=2, height=1, padx=20, pady=15,bg="#666769", fg="white", command=lambda: button_click(3))
