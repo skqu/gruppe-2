@@ -1,9 +1,7 @@
 # Dette er den gode gruppe
 
-Her er vores gruppes projekter gennem semestreret.
-
-Det er vores test 2
+DnD spil med GUI
 
 
-## En hilsen fra underviser
+
 
