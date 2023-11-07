@@ -1,0 +1,68 @@
+import pygame
+import math
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+HERO_SIZE = 50
+SPEED = 5
+
+bg_level_one = pygame.image.load('semester 1/bane5.png')
+bg_level_one = pygame.transform.scale(bg_level_one, (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+class Hero:
+    def __init__(self, name, health, strength, defense, x, y):
+        self.x = x
+        self.y = y
+   
+    def move(self, dx, dy):
+        new_x = self.x + dx
+        new_y = self.y + dy
+        if new_x >= 0 and new_x <= SCREEN_WIDTH - HERO_SIZE:
+            self.x = new_x
+        if new_y >= 0 and new_y <= SCREEN_HEIGHT - HERO_SIZE:
+            self.y = new_y
+
+class Monster:
+    def __init__(self, name, health, strength, defense, x, y):
+        self.x = x
+        self.y = y
+
+    def move_towards_hero(self, hero):
+        dx = hero.x - self.x
+        dy = hero.y - self.y
+        angle = math.atan2(dy, dx)
+        self.x += math.cos(angle)
+        self.y += math.sin(angle)
+
+pygame.init()
+
+size = (SCREEN_WIDTH, SCREEN_HEIGHT)
+screen = pygame.display.set_mode(size)
+
+clock = pygame.time.Clock()
+
+running = True
+while running:
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        hero.move(-SPEED, 0)
+    if keys[pygame.K_RIGHT]:
+        hero.move(SPEED, 0)
+    if keys[pygame.K_UP]:
+        hero.move(0, -SPEED)
+    if keys[pygame.K_DOWN]:
+        hero.move(0, SPEED)
+
+    monster1.move_towards_hero(hero)
+    monster2.move_towards_hero(hero)
+
+    screen.blit(bg_level_one, (0, 0))
+    screen.blit(hero.image, (hero.x, hero.y))
+    screen.blit(monster1.image, (monster1.x, monster1.y))
+    screen.blit(monster2.image, (monster2.x, monster2.y))
+
+    pygame.display.flip()
+    clock.tick(FPS)
+
+pygame.quit()
