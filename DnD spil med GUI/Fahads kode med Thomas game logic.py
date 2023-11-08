@@ -66,7 +66,7 @@ font2 = pygame.font.SysFont('arial', 20, bold = True)
 
 # Add text to get the user to start the game
 game_message = font1.render('Press space to start', False,(255, 0, 0))
-game_message_rect = game_message.get_rect(center = (400,300))
+game_message_rect = game_message.get_rect(center = (400,280))
 game_active = False
 
 # Game loop
