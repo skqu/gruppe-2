@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+# sørg for at class monster har self.active = False på
+
 #Added fonts
 font1 = pygame.font.SysFont('arial', 30, bold = True)
 font2 = pygame.font.SysFont('arial', 20, bold = True)
