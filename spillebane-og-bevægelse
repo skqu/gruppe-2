@@ -6,14 +6,26 @@ SCREEN_HEIGHT = 600
 FPS = 60
 HERO_SIZE = 50
 SPEED = 5
+STATS_HEIGHT = 50
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 
 bg_level_one = pygame.image.load('semester 1/bane5.png')
 bg_level_one = pygame.transform.scale(bg_level_one, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 class Hero:
     def __init__(self, name, health, strength, defense, x, y):
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.defense = defense
         self.x = x
         self.y = y
+        self.image = pygame.Surface((HERO_SIZE, HERO_SIZE))
+        self.image.fill(BLUE)
    
     def move(self, dx, dy):
         new_x = self.x + dx
@@ -25,8 +37,14 @@ class Hero:
 
 class Monster:
     def __init__(self, name, health, strength, defense, x, y):
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.defense = defense
         self.x = x
         self.y = y
+        self.image = pygame.Surface((HERO_SIZE, HERO_SIZE))
+        self.image.fill(RED)
 
     def move_towards_hero(self, hero):
         dx = hero.x - self.x
@@ -34,6 +52,10 @@ class Monster:
         angle = math.atan2(dy, dx)
         self.x += math.cos(angle)
         self.y += math.sin(angle)
+
+hero = Hero("Aragorn", 30, 100, 10, 0, 0)
+monster1 = Monster("Dragon", 12, 30, 5, 100, 100)  
+monster2 = Monster("Giant", 12, 30, 5, 300, 300)  
 
 pygame.init()
 
@@ -44,6 +66,10 @@ clock = pygame.time.Clock()
 
 running = True
 while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         hero.move(-SPEED, 0)
@@ -61,6 +87,8 @@ while running:
     screen.blit(hero.image, (hero.x, hero.y))
     screen.blit(monster1.image, (monster1.x, monster1.y))
     screen.blit(monster2.image, (monster2.x, monster2.y))
+
+    font = pygame.font.Font(None, 20)  
 
     pygame.display.flip()
     clock.tick(FPS)
