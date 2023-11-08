@@ -16,6 +16,17 @@ BLUE = (0, 0, 255)
 bg_level_one = pygame.image.load('semester 1/bane5.png')
 bg_level_one = pygame.transform.scale(bg_level_one, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
+hero_image = pygame.image.load('semester 1/aragorn.png')
+dragon_image = pygame.image.load('semester 1/dragon.png')
+giant_image = pygame.image.load('semester 1/giant.png')
+
+SIZE = 100 
+
+hero_image = pygame.transform.scale(hero_image, (SIZE, SIZE))
+dragon_image = pygame.transform.scale(dragon_image, (SIZE, SIZE))
+giant_image = pygame.transform.scale(giant_image, (SIZE, SIZE))
+
+
 class Hero:
     def __init__(self, name, health, strength, defense, x, y):
         self.name = name
@@ -24,9 +35,8 @@ class Hero:
         self.defense = defense
         self.x = x
         self.y = y
-        self.image = pygame.Surface((HERO_SIZE, HERO_SIZE))
-        self.image.fill(BLUE)
-   
+        self.image = hero_image  
+
     def move(self, dx, dy):
         new_x = self.x + dx
         new_y = self.y + dy
@@ -36,15 +46,14 @@ class Hero:
             self.y = new_y
 
 class Monster:
-    def __init__(self, name, health, strength, defense, x, y):
+    def __init__(self, name, health, strength, defense, x, y, image):
         self.name = name
         self.health = health
         self.strength = strength
         self.defense = defense
         self.x = x
         self.y = y
-        self.image = pygame.Surface((HERO_SIZE, HERO_SIZE))
-        self.image.fill(RED)
+        self.image = image  # Brug det indlæste billede i stedet for en firkant
 
     def move_towards_hero(self, hero):
         dx = hero.x - self.x
@@ -54,8 +63,8 @@ class Monster:
         self.y += math.sin(angle)
 
 hero = Hero("Aragorn", 30, 100, 10, 0, 0)
-monster1 = Monster("Dragon", 12, 30, 5, 100, 100)  
-monster2 = Monster("Giant", 12, 30, 5, 300, 300)  
+monster1 = Monster("Dragon", 12, 30, 5, 100, 100, dragon_image)  
+monster2 = Monster("Giant", 12, 30, 5, 300, 300, giant_image)  
 
 pygame.init()
 
