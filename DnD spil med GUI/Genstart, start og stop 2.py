@@ -11,6 +11,8 @@ class Game:
         self.HERO_SIZE = 70
         self.SPEED = 5
 
+        self.name = pygame.display.set_caption("DnD 2.0")
+
         self.bg_level_one = pygame.image.load('bane5.png')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
@@ -19,6 +21,8 @@ class Game:
 
         self.hero_image = pygame.image.load('Knight.png')
         self.hero_image = pygame.transform.scale(self.hero_image, (self.HERO_SIZE, self.HERO_SIZE))
+
+        self.icon = pygame.display.set_icon(self.hero_image)
 
         self.size = (self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
         self.screen = pygame.display.set_mode(self.size)
