@@ -5,7 +5,7 @@ import sys
 class Game:
     SCREEN_WIDTH = 800
     SCREEN_BOTTOM_PANEL_HEIGHT = 250
-    SCREEN_HEIGHT = 150 + SCREEN_BOTTOM_PANEL_HEIGHT
+    SCREEN_HEIGHT = 300 + SCREEN_BOTTOM_PANEL_HEIGHT
     HERO_SIZE = 70
 
 
@@ -152,11 +152,11 @@ class StatsPanel:
     def __init__(self, hero, monster, screen):
         self.red = (255, 0, 0)
         self.font = pygame.font.SysFont("Times New Roman", 15)
-        original_panel_img = pygame.image.load("panel.png").convert_alpha()
-        scaling_factor = 200 / original_panel_img.get_height()
-        new_width = int(original_panel_img.get_width() * scaling_factor)
-        new_height = 200
-        self.panel_img = pygame.transform.scale(original_panel_img, (new_width, new_height))
+        panel_img = pygame.image.load("panel.png").convert_alpha()
+        scaling_factor = 300 / panel_img.get_height()
+        panel_width = int(panel_img.get_width() + scaling_factor)
+        panel_height = 250
+        self.panel_img = pygame.transform.scale(panel_img, (panel_width, panel_height))
         self.aragorn_surface = pygame.image.load("aragorn.jpg")
         self.dragon_surface = pygame.image.load("dragon.jpg")
 
