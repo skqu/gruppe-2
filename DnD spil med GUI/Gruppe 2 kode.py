@@ -55,6 +55,10 @@ class Game:
                     sys.exit()
 
                 if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+
                     if not self.game_active:
                         if event.key == pygame.K_SPACE:
                             self.game_active = True
@@ -73,9 +77,6 @@ class Game:
                             self.monster1.y = 100
                             self.monster2.x = 700
                             self.monster2.y = 300
-                        elif event.key == pygame.K_ESCAPE:
-                            pygame.quit()
-                            sys.exit()
 
             self.screen.blit(self.bg_level_one, (0, 0))
 
