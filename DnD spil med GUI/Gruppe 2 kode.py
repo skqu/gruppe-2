@@ -49,7 +49,7 @@ class Game:
         self.monster1 = Monster("Dragon", 40, 9, 3, 100, 100, self.dragon_image)
         self.monster2 = Monster("Giant", 60, 5, 2, 700, 300, self.giant_image)
 
-        self.stats_panel = StatsPanel(self.hero, self.monster1, self.screen)
+        self.stats_panel = StatsPanel(self.hero, self.monster1, self.monster2, self.screen)
 
     def run(self):
         while True:
@@ -157,7 +157,7 @@ class Monster:
         self.y += math.sin(angle)
 
 class StatsPanel:
-    def __init__(self, hero, monster, screen):
+    def __init__(self, hero, monster1, monster2, screen):
         self.red = (255, 0, 0)
         self.font = pygame.font.SysFont("Times New Roman", 20)
         panel_img = pygame.image.load("billeder/panel.png").convert_alpha()
@@ -165,12 +165,14 @@ class StatsPanel:
         panel_width = int(panel_img.get_width() + scaling_factor)
         panel_height = 250
         self.panel_img = pygame.transform.scale(panel_img, (panel_width, panel_height))
-        self.aragorn_surface = pygame.image.load("billeder/aragorn.jpg")
+        self.aragorn_surface = pygame.image.load("billeder/dragon_stat.jpg")
         self.dragon_surface = pygame.image.load("billeder/dragon_stat.jpg")
+        self.giant_surface = pygame.image.load("billeder/giant_profile.png")
 
 
         self.hero = hero
-        self.monster = monster
+        self.monster1 = monster1
+        self.monster2 = monster2
         self.screen = screen
 
     def draw_text(self, text, text_col, x, y):
@@ -180,7 +182,7 @@ class StatsPanel:
     def draw_panel(self):
         self.screen.blit(self.panel_img, (0, Game.SCREEN_HEIGHT))
 
-        hero_x, monster_x = 150, 525
+        hero_x, monster_drage, monster_giant = 150, 400, 550
         info_y = Game.SCREEN_HEIGHT + 30
 
         self.screen.blit(self.aragorn_surface, (hero_x, info_y))
@@ -189,11 +191,17 @@ class StatsPanel:
         self.draw_text(f"Strength: {self.hero.attack}", self.red, hero_x, info_y + 150)
         self.draw_text(f"Defense: {self.hero.defense}", self.red, hero_x, info_y + 170)
 
-        self.screen.blit(self.dragon_surface, (monster_x, info_y))
-        self.draw_text(f"{self.monster.name}", self.red, monster_x, info_y + 100)
-        self.draw_text(f"Health: {self.monster.health}", self.red, monster_x, info_y + 130)
-        self.draw_text(f"Strength: {self.monster.attack}", self.red, monster_x, info_y + 150)
-        self.draw_text(f"Defense: {self.monster.defense}", self.red, monster_x, info_y + 170)
+        self.screen.blit(self.dragon_surface, (monster_drage, info_y))
+        self.draw_text(f"{self.monster1.name}", self.red, monster_drage, info_y + 100)
+        self.draw_text(f"Health: {self.monster1.health}", self.red, monster_drage, info_y + 130)
+        self.draw_text(f"Strength: {self.monster1.attack}", self.red, monster_drage, info_y + 150)
+        self.draw_text(f"Defense: {self.monster1.defense}", self.red, monster_drage, info_y + 170)
+
+        self.screen.blit(self.giant_surface, (monster_giant, info_y))
+        self.draw_text(f"{self.monster2.name}", self.red, monster_giant, info_y + 100)
+        self.draw_text(f"Health: {self.monster2.health}", self.red, monster_giant, info_y + 130)
+        self.draw_text(f"Strength: {self.monster2.attack}", self.red, monster_giant, info_y + 150)
+        self.draw_text(f"Defense: {self.monster2.defense}", self.red, monster_giant, info_y + 170)
 
 if __name__ == "__main__":
     game = Game()
