@@ -45,9 +45,9 @@ class Game:
         self.game_message_rect = self.game_message.get_rect(center=(400, 280))
         self.game_active = False
 
-        self.hero = Hero("Aragorn", 100, 10, 5, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, self.hero_image)
-        self.monster1 = Monster("Dragon", 50, 8, 3, 100, 100, self.dragon_image)
-        self.monster2 = Monster("Giant", 50, 8, 3, 700, 300, self.giant_image)
+        self.hero = Hero("Aragorn", 100, 12, 5, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, self.hero_image)
+        self.monster1 = Monster("Dragon", 40, 9, 3, 100, 100, self.dragon_image)
+        self.monster2 = Monster("Giant", 60, 5, 2, 700, 300, self.giant_image)
 
         self.stats_panel = StatsPanel(self.hero, self.monster1, self.screen)
 
