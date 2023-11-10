@@ -165,7 +165,7 @@ class StatsPanel:
         panel_width = int(panel_img.get_width() + scaling_factor)
         panel_height = 250
         self.panel_img = pygame.transform.scale(panel_img, (panel_width, panel_height))
-        self.aragorn_surface = pygame.image.load("billeder/dragon_stat.jpg")
+        self.aragorn_surface = pygame.image.load("billeder/aragorn.jpg")
         self.dragon_surface = pygame.image.load("billeder/dragon_stat.jpg")
         self.giant_surface = pygame.image.load("billeder/giant_profile.png")
 
