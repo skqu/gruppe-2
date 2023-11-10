@@ -18,12 +18,12 @@ class Game:
 
         self.name = pygame.display.set_caption("DnD 2.0")
 
-        self.bg_level_one = pygame.image.load('map.jpg')
+        self.bg_level_one = pygame.image.load('billeder/map.jpg')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
         self.hero_image = pygame.image.load('Knight.png')
-        self.dragon_image = pygame.image.load('dragon3.png')
-        self.giant_image = pygame.image.load('giant.png')
+        self.dragon_image = pygame.image.load('billeder/dragon3.png')
+        self.giant_image = pygame.image.load('billeder/giant.png')
 
         self.SIZE = 70
 
@@ -160,13 +160,13 @@ class StatsPanel:
     def __init__(self, hero, monster, screen):
         self.red = (255, 0, 0)
         self.font = pygame.font.SysFont("Times New Roman", 20)
-        panel_img = pygame.image.load("panel.png").convert_alpha()
+        panel_img = pygame.image.load("billeder/panel.png").convert_alpha()
         scaling_factor = 300 / panel_img.get_height()
         panel_width = int(panel_img.get_width() + scaling_factor)
         panel_height = 250
         self.panel_img = pygame.transform.scale(panel_img, (panel_width, panel_height))
-        self.aragorn_surface = pygame.image.load("aragorn.jpg")
-        self.dragon_surface = pygame.image.load("dragon_stat.jpg")
+        self.aragorn_surface = pygame.image.load("billeder/aragorn.jpg")
+        self.dragon_surface = pygame.image.load("billeder/dragon_stat.jpg")
 
 
         self.hero = hero
