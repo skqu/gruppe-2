@@ -1,9 +1,10 @@
 import pygame
 
 pygame.init()
+BOTTOM_PANEL_HEIGHT = 300
 SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-BOTTOM_PANEL_HEIGHT = 350
+SCREEN_HEIGHT = 600 + BOTTOM_PANEL_HEIGHT
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT + BOTTOM_PANEL_HEIGHT))
 pygame.display.set_caption("Dungeon and Dragons")
 
