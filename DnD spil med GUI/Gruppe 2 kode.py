@@ -21,9 +21,9 @@ class Game:
         self.bg_level_one = pygame.image.load('billeder/map.jpg')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
-        self.hero_image = pygame.image.load('billeder/Knight.png')
+        self.hero_image = pygame.image.load('billeder/hero2.png')
         self.dragon_image = pygame.image.load('billeder/dragon3.png')
-        self.giant_image = pygame.image.load('billeder/giant.png')
+        self.giant_image = pygame.image.load('billeder/giant2.png')
 
         self.SIZE = 70
 
@@ -90,13 +90,13 @@ class Game:
                 self.screen.blit(self.game_message, self.game_message_rect)
             else:
                 keys = pygame.key.get_pressed()
-                if keys[pygame.K_a]:
+                if keys[pygame.K_LEFT]:
                     self.hero.move(-self.SPEED, 0)
-                if keys[pygame.K_d]:
+                if keys[pygame.K_RIGHT]:
                     self.hero.move(self.SPEED, 0)
-                if keys[pygame.K_w]:
+                if keys[pygame.K_UP]:
                     self.hero.move(0, -self.SPEED)
-                if keys[pygame.K_s]:
+                if keys[pygame.K_DOWN]:
                     self.hero.move(0, self.SPEED)
 
                 if self.monster1.active:
