@@ -22,7 +22,7 @@ class Game:
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
         self.hero_image = pygame.image.load('Knight.png')
-        self.dragon_image = pygame.image.load('Dragon.png')
+        self.dragon_image = pygame.image.load('dragon3.png')
         self.giant_image = pygame.image.load('giant.png')
 
         self.SIZE = 70
