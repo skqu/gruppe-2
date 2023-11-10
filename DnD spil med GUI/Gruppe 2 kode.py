@@ -18,14 +18,18 @@ class Game:
 
         self.name = pygame.display.set_caption("DnD 2.0")
 
-        self.bg_level_one = pygame.image.load('bane5.png')
+        self.bg_level_one = pygame.image.load('map.jpg')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
-        self.monster_image = pygame.image.load('Dragon.png')
-        self.monster_image = pygame.transform.scale(self.monster_image, (self.HERO_SIZE, self.HERO_SIZE))
-
         self.hero_image = pygame.image.load('Knight.png')
-        self.hero_image = pygame.transform.scale(self.hero_image, (self.HERO_SIZE, self.HERO_SIZE))
+        self.dragon_image = pygame.image.load('Dragon.png')
+        self.giant_image = pygame.image.load('giant.png')
+
+        self.SIZE = 70
+
+        self.hero_image = pygame.transform.scale(self.hero_image, (self.SIZE, self.SIZE))
+        self.dragon_image = pygame.transform.scale(self.dragon_image, (self.SIZE, self.SIZE))
+        self.giant_image = pygame.transform.scale(self.giant_image, (self.SIZE, self.SIZE))
 
         self.icon = pygame.display.set_icon(self.hero_image)
 
@@ -34,16 +38,16 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.font1 = pygame.font.SysFont('arial', 30, bold=True)
-        self.font2 = pygame.font.SysFont('arial', 20, bold=True)
+        self.font1 = pygame.font.SysFont('Times New Roman', 30, bold=True)
+        self.font2 = pygame.font.SysFont('Times New Roman', 20, bold=True)
 
-        self.game_message = self.font1.render('Press space to start', False, (255, 0, 0))
+        self.game_message = self.font1.render('Press space to start', False, ('white'))
         self.game_message_rect = self.game_message.get_rect(center=(400, 280))
         self.game_active = False
 
         self.hero = Hero("Aragorn", 100, 10, 5, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, self.hero_image)
-        self.monster1 = Monster("Dragon", 50, 8, 3, 100, 100, self.monster_image)
-        self.monster2 = Monster("Giant", 50, 8, 3, 700, 300, self.monster_image)
+        self.monster1 = Monster("Dragon", 50, 8, 3, 100, 100, self.dragon_image)
+        self.monster2 = Monster("Giant", 50, 8, 3, 700, 300, self.giant_image)
 
         self.stats_panel = StatsPanel(self.hero, self.monster1, self.screen)
 
