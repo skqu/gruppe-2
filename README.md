@@ -1,9 +1,4 @@
-# Dette er den gode gruppe
+Vores DnD 2.0 spil
 
-Her er vores gruppes projekter gennem semestreret.
-
-Det er vores test 2
-
-
-## En hilsen fra underviser
+I mappen finder du spillet og de tidligere versioner af spillet, samt de billeder der er blevet brugt til de forskellige versioner.
 
