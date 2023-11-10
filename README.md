@@ -1,6 +1,4 @@
-# Dette er den gode gruppe
-
-DnD spil med GUI
+Vores DnD 2.0 spil
 
 
 
