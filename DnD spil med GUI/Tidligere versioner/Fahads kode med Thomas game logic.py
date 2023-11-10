@@ -8,13 +8,13 @@ FPS = 60
 HERO_SIZE = 70
 SPEED = 5
 
-bg_level_one = pygame.image.load('billeder/bane5.png')
+bg_level_one = pygame.image.load('../billeder/bane5.png')
 bg_level_one = pygame.transform.scale(bg_level_one, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-monster_image = pygame.image.load('billeder/Dragon.png')
+monster_image = pygame.image.load('../billeder/Dragon.png')
 monster_image = pygame.transform.scale(monster_image, (HERO_SIZE, HERO_SIZE))
 
-hero_image = pygame.image.load('Knight.png')
+hero_image = pygame.image.load('../billeder/Knight.png')
 hero_image = pygame.transform.scale(hero_image, (HERO_SIZE, HERO_SIZE))
 
 class Hero:

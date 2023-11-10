@@ -13,13 +13,13 @@ class Game:
 
         self.name = pygame.display.set_caption("DnD 2.0")
 
-        self.bg_level_one = pygame.image.load('billeder/bane5.png')
+        self.bg_level_one = pygame.image.load('../billeder/bane5.png')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
-        self.monster_image = pygame.image.load('billeder/Dragon.png')
+        self.monster_image = pygame.image.load('../billeder/Dragon.png')
         self.monster_image = pygame.transform.scale(self.monster_image, (self.HERO_SIZE, self.HERO_SIZE))
 
-        self.hero_image = pygame.image.load('Knight.png')
+        self.hero_image = pygame.image.load('../billeder/Knight.png')
         self.hero_image = pygame.transform.scale(self.hero_image, (self.HERO_SIZE, self.HERO_SIZE))
 
         self.icon = pygame.display.set_icon(self.hero_image)

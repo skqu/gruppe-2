@@ -21,7 +21,7 @@ class Game:
         self.bg_level_one = pygame.image.load('billeder/map.jpg')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
-        self.hero_image = pygame.image.load('Knight.png')
+        self.hero_image = pygame.image.load('billeder/Knight.png')
         self.dragon_image = pygame.image.load('billeder/dragon3.png')
         self.giant_image = pygame.image.load('billeder/giant.png')
 
