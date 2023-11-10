@@ -1,0 +1,187 @@
+import pygame
+import math
+import sys
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+HERO_SIZE = 70
+SPEED = 5
+BOTTOM_PANEL_HEIGHT = 350
+
+bg_level_one = pygame.image.load('semester 1/bane5.png')
+bg_level_one = pygame.transform.scale(bg_level_one, (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+hero_image = pygame.image.load('semester 1/aragorn.png')
+dragon_image = pygame.image.load('semester 1/dragon.png')
+giant_image = pygame.image.load('semester 1/giant.png')
+
+SIZE = 100 
+
+hero_image = pygame.transform.scale(hero_image, (SIZE, SIZE))
+dragon_image = pygame.transform.scale(dragon_image, (SIZE, SIZE))
+giant_image = pygame.transform.scale(giant_image, (SIZE, SIZE))
+
+class Hero:
+    def __init__(self, name, health, strength, defense, x, y):
+        self.x = x
+        self.y = y
+        self.image = hero_image  
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.defense = defense
+
+    def move(self, dx, dy):
+        new_x = self.x + dx
+        new_y = self.y + dy
+        if new_x >= 0 and new_x <= SCREEN_WIDTH - HERO_SIZE:
+            self.x = new_x
+        if new_y >= 0 and new_y <= SCREEN_HEIGHT - HERO_SIZE:
+            self.y = new_y
+
+class Monster:
+    def __init__(self, name, health, strength, defense, x, y, image):
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.defense = defense
+        self.x = x
+        self.y = y
+        self.image = image
+
+    def move_towards_hero(self, hero):
+        if not self.active:
+            return
+        dx = hero.x - self.x
+        dy = hero.y - self.y
+        angle = math.atan2(dy, dx)
+        self.x += math.cos(angle)
+        self.y += math.sin(angle)
+
+hero = Hero("Aragorn", 30, 100, 10, 0, 0)
+monster1 = Monster("Dragon", 12, 30, 5, 100, 100, dragon_image)  
+monster2 = Monster("Giant", 12, 30, 5, 300, 300, giant_image)  
+
+pygame.init()
+
+size = (SCREEN_WIDTH, SCREEN_HEIGHT + BOTTOM_PANEL_HEIGHT)
+screen = pygame.display.set_mode(size)
+
+clock = pygame.time.Clock()
+font1 = pygame.font.SysFont('arial', 30, bold = True)
+font2 = pygame.font.SysFont('arial', 20, bold = True)
+
+game_message = font1.render('Press space to start', False,(255, 0, 0))
+game_message_rect = game_message.get_rect(center = (400,300))
+game_active = False
+
+
+class stats_panel:
+    def __init__(self):
+        self.red = (255, 0, 0)
+        self.font = pygame.font.SysFont("Times New Roman", 15)  # Mindre tekst
+        self.panel_img = pygame.image.load("semester 1/panel.png").convert_alpha()
+        self.aragorn_surface = pygame.image.load("semester 1/aragorn.jpg")
+        self.dragon_surface = pygame.image.load("semester 1/dragon.jpg")
+
+        self.hero = hero 
+        self.monster = monster1
+
+    def draw_text(self, text, text_col, x, y):
+        text = self.font.render(text, True, text_col)
+        screen.blit(text, (x, y))
+
+    def draw_panel(self):
+        screen.blit(self.panel_img, (0, SCREEN_HEIGHT))
+
+        hero_x, monster_x = 50, 425  # Rykket endnu mere til venstre
+        info_y = SCREEN_HEIGHT + 40
+        stats_spacing = 90  # Mindre afstand mellem hver stat
+        
+        screen.blit(self.aragorn_surface, (hero_x, info_y))
+        self.draw_text(f"{self.hero.name}", self.red, hero_x, info_y + 110)
+        self.draw_text(f"Health: {self.hero.health}", self.red, hero_x + stats_spacing, info_y + 110)
+        self.draw_text(f"Strength: {self.hero.strength}", self.red, hero_x + 2 * stats_spacing, info_y + 110)
+        self.draw_text(f"Defense: {self.hero.defense}", self.red, hero_x + 3 * stats_spacing, info_y + 110)
+
+        screen.blit(self.dragon_surface, (monster_x, info_y))
+        self.draw_text(f"{self.monster.name}", self.red, monster_x, info_y + 110)
+        self.draw_text(f"Health: {self.monster.health}", self.red, monster_x + stats_spacing, info_y + 110)
+        self.draw_text(f"Strength: {self.monster.strength}", self.red, monster_x + 2 * stats_spacing, info_y + 110)
+        self.draw_text(f"Defense: {self.monster.defense}", self.red, monster_x + 3 * stats_spacing, info_y + 110)
+
+game = stats_panel()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.KEYUP:
+            if not game_active:
+                if event.key == pygame.K_SPACE:
+                    game_active = True
+                    monster1.active = True
+                    monster2.active = True
+
+
+            else:
+                if event.key == pygame.K_r:
+                    game_active = False
+                    monster1.active = False
+                    monster2.active = False
+
+               
+                    hero.x = SCREEN_WIDTH // 2
+                    hero.y = SCREEN_HEIGHT // 2
+
+             
+                    monster1.x = 100
+                    monster1.y = 100
+                    monster2.x = 700
+                    monster2.y = 500
+        
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+
+    screen.blit(bg_level_one, (0, 0))
+
+    if not game_active:
+        screen.blit(game_message, game_message_rect)
+
+
+    else:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            hero.move(-SPEED, 0)
+        if keys[pygame.K_RIGHT]:
+            hero.move(SPEED, 0)
+        if keys[pygame.K_UP]:
+            hero.move(0, -SPEED)
+        if keys[pygame.K_DOWN]:
+            hero.move(0, SPEED)
+
+ 
+        if monster1.active:
+            monster1.move_towards_hero(hero)
+        if monster2.active:
+            monster2.move_towards_hero(hero)
+
+    screen.blit(hero.image, (hero.x, hero.y))
+    screen.blit(monster1.image, (monster1.x, monster1.y))
+    screen.blit(monster2.image, (monster2.x, monster2.y))
+
+    game.draw_panel()
+
+    close_text = font2.render('Press ESCAPE to close the game', True, (255, 255, 255))
+    restart_text = font2.render('Press R to restart the game', True, (255, 255, 255))
+    screen.blit(close_text, (10, 10))
+    screen.blit(restart_text, (10, 40))
+
+    pygame.display.flip()
+    clock.tick(FPS)
+
+pygame.quit()
