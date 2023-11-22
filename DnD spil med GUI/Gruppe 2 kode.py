@@ -16,11 +16,13 @@ class Game:
         self.FPS = 60
         self.SPEED = 5
 
+        # I bruger ikke self.name i resten af game klassen - Spild af resourcer. 
         self.name = pygame.display.set_caption("DnD 2.0")
 
         self.bg_level_one = pygame.image.load('billeder/map.jpg')
         self.bg_level_one = pygame.transform.scale(self.bg_level_one, (self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
+        # I kan med fordel bruge loops og lister til at håndtere de her stumper kode der gør "det samme"
         self.hero_image = pygame.image.load('billeder/hero2.png')
         self.dragon_image = pygame.image.load('billeder/dragon3.png')
         self.giant_image = pygame.image.load('billeder/giant2.png')
@@ -44,6 +46,7 @@ class Game:
         self.game_message = self.font1.render('Press space to start', False, ('white'))
         self.game_message_rect = self.game_message.get_rect(center=(400, 280))
         self.game_active = False
+
 
         self.hero = Hero("Aragorn", 100, 12, 5, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, self.hero_image)
         self.monster1 = Monster("Dragon", 40, 9, 3, 100, 100, self.dragon_image)
@@ -120,8 +123,8 @@ class Game:
 
 class Hero:
     def __init__(self, name, health, strength, defense, x, y, image):
-        self.name = name
-        self.health = health
+        self.name = name 
+        self.health = health 
         self.attack = strength
         self.defense = defense
         self.x = x
@@ -185,6 +188,7 @@ class StatsPanel:
         hero_x, monster_drage, monster_giant = 150, 400, 550
         info_y = Game.SCREEN_HEIGHT + 30
 
+        # Igen brug list og loops
         self.screen.blit(self.aragorn_surface, (hero_x, info_y))
         self.draw_text(f"{self.hero.name}", self.red, hero_x, info_y + 100)
         self.draw_text(f"Health: {self.hero.health}", self.red, hero_x, info_y + 130)
