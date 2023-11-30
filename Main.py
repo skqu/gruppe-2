@@ -2,7 +2,6 @@ from Lommeregner.EquationHistory import EquationHistory
 from Lommeregner.Calculator import Calculator
 from Lommeregner.GUI import GUI
 import tkinter as tk
-#test
 
 class Main:
     def __init__(self):

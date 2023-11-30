@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.font as tkFont
+import csv
 #import tkinter.messagebox as messagebox
 
 class EquationHistory:
@@ -7,11 +8,24 @@ class EquationHistory:
         self.equation_history = []
 
     def add_equation(self, equation, result):
-         full_equation = f"{equation} = {result}"
-         self.equation_history.append(full_equation)
+        full_equation = f"{equation} = {result}\n"
+        file = open("data.csv", "a")
+        file.write(full_equation)
+        file.close()
+        self.equation_history.append(full_equation)
+
+
 
     def get_last_equation(self, count=10):
-         return self.equation_history[-count:]
+        with open("data.csv", "r") as file:
+            reader = csv.reader(file)
+            lines = list(reader)
+        last_equations = lines[-count:]
+
+        for equation in last_equations:
+            self.equation_history.append(equation[0])
+
+        return self.equation_history
 
     def show_last_equations(self, root, calculator, label_resultat):
         last_equations = self.get_last_equation()
@@ -26,7 +40,8 @@ class EquationHistory:
             for i, equation in enumerate(last_equations):
                 text_width = button_font.measure(equation)
                 button_width = max(20, text_width // 10)
-                tk.Button(popupbox, text=equation, width=button_width, height=1, bg="#a8a625", font=("arial", 20, "bold"), command=lambda eq=equation: self.retrieve_equation(eq, calculator, label_resultat)).grid(row=i, column=0, pady=2, sticky="ew")
+                tk.Button(popupbox, text=equation, width=button_width, height=1, bg="#a8a625", font=("arial", 20, "bold"),
+                command=lambda eq=equation: self.retrieve_equation(eq, calculator, label_resultat)).grid(row=i, column=0, pady=2, sticky="ew")
         else:
           popupbox.title("Error")
 
@@ -43,4 +58,6 @@ class EquationHistory:
         label_resultat.config(text=calculator.equation)
 
     def clear_equations(self):
+        with open("data.csv", "w") as file:
+            file.truncate(0)
         return self.equation_history.clear()
